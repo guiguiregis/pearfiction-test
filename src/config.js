@@ -1,6 +1,8 @@
 export const CONFIG = {
     REEL_COUNT: 5,
     ROW_COUNT: 3,
+    SYMBOL_SIZE: 130, // Adjust based on your image sizes
+    REEL_SPACING: 5,
     // The specific bands provided in the exercise
     BANDS:[
         ["hv2", "lv3", "lv3", "hv1", "hv1", "lv1", "hv1", "hv4", "lv1", "hv3", "hv2", "hv3", "lv4", "hv4", "lv1", "hv2", "lv4", "lv1", "lv3", "hv2"],
@@ -61,4 +63,4 @@ export const CONFIG = {
             5:3,
         },
     }
-}
+};
