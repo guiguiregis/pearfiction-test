@@ -29,7 +29,7 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 |------|------|
 | `src/main.ts` | Pixi app, asset loading, layout (reels → spin → win text), resize scaling |
 | `src/utils.ts` | Win evaluation: screen grid from bands, paylines 1–3 vs 4–7 rules |
-| `src/config.js` | Reel bands, paylines, paytable, row/column counts |
+| `src/config.ts` | Reel bands, paylines, paytable, row/column counts |
 | `src/components/Reel.ts` | One reel column: stacked symbol sprites |
 | `public/assets/` | Symbol and spin button PNGs |
 | `public/style.css` | Page and `#pixi-container` layout |
@@ -37,7 +37,7 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 
 ## Behaviour (brief)
 
-- **Grid:** five columns × three visible rows per the band math in `config.js`.
+- **Grid:** five columns × three visible rows per the band math in `config.ts`.
 - **Paylines:** straight lines (1–3) pay left-to-right from column 0; zig-zag lines (4–7) use the best contiguous same-symbol run on the path (see `utils.ts` and the exercise examples).
 - **UI:** reels centered, spin button under the reels, multiline win text under the spin; the whole cluster scales to fit the viewport on resize.
 

@@ -82,7 +82,6 @@ import { evaluateSpin, type WinDetail } from "./utils";
     container.removeChild(loadingText);
     startGame(app, textures);
   }, 1000);
-  
 })();
 
 function startGame(app: Application, textures: Record<string, Texture>) {
@@ -97,7 +96,7 @@ function startGame(app: Application, textures: Record<string, Texture>) {
   content.addChild(reelGroup);
 
   for (let i = 0; i < CONFIG.REEL_COUNT; i++) {
-    const reel = new Reel(CONFIG.BANDS[i], textures);
+    const reel = new Reel(CONFIG.BANDS[i]);
     reel.x = i * (CONFIG.SYMBOL_SIZE + CONFIG.REEL_SPACING);
     reelGroup.addChild(reel);
     reels.push(reel);
@@ -195,12 +194,9 @@ function startGame(app: Application, textures: Record<string, Texture>) {
     initialPositions.forEach((pos, i) => reels[i].updateSymbols(pos, textures));
 
     const result = evaluateSpin(initialPositions);
-
     updateWinDisplay(result);
-
-    updateLayout();
   };
 
-  startWithInitialState([0,0,0,0,0]);
+  startWithInitialState([0, 0, 0, 0, 0]);
   fitToScreen();
 }
