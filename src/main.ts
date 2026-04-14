@@ -72,16 +72,9 @@ import { evaluateSpin, type WinDetail } from "./utils";
     loadingText.text = `${Math.round(progress * 100)}%`;
   });
 
-  //wait for 1 second before removing the loading text and starting the game
-  //to simulate a real-world scenario
-  //this is not a good practice and should be removed in a real-world scenario
-  //but it is useful for the exercise
-
-  setTimeout(() => {
-    window.removeEventListener("resize", layoutLoadingText);
-    container.removeChild(loadingText);
-    startGame(app, textures);
-  }, 1000);
+  window.removeEventListener("resize", layoutLoadingText);
+  container.removeChild(loadingText);
+  startGame(app, textures);
 })();
 
 function startGame(app: Application, textures: Record<string, Texture>) {
