@@ -135,3 +135,5 @@ export const CONFIG = {
     lv4: { 3: 1, 4: 2, 5: 3 },
   },
 };
+
+export type Paytable = typeof CONFIG.PAYTABLE;

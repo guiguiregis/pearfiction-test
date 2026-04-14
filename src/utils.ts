@@ -1,4 +1,4 @@
-import { CONFIG } from "./config";
+import { CONFIG, type Paytable } from "./config";
 
 export interface WinDetail {
   paylineId: number;
@@ -7,14 +7,13 @@ export interface WinDetail {
   payout: number;
 }
 
-type Paytable = Record<string, Record<number, number>>;
-
 function payoutForSymbolCount(
   paytable: Paytable,
   symbolId: string,
   count: number,
 ): number | null {
-  const p = paytable[symbolId]?.[count];
+  const row = paytable[symbolId as keyof Paytable];
+  const p = row?.[count as keyof typeof row];
   return p ?? null;
 }
 
@@ -24,7 +23,7 @@ function winLeftAnchored(path: string[]): {
   count: number;
   payout: number;
 } | null {
-  const paytable = CONFIG.PAYTABLE as Paytable;
+  const paytable = CONFIG.PAYTABLE;
   const firstSymbol = path[0];
   let matchCount = 1;
   for (let col = 1; col < path.length; col++) {
@@ -46,7 +45,7 @@ function winBestRunOnPath(path: string[]): {
   count: number;
   payout: number;
 } | null {
-  const paytable = CONFIG.PAYTABLE as Paytable;
+  const paytable = CONFIG.PAYTABLE;
   let best: { symbolId: string; count: number; payout: number } | null = null;
   for (let start = 0; start < path.length; start++) {
     const symbolId = path[start];
@@ -72,6 +71,10 @@ const ZIGZAG_PAYLINE_INDEX_START = 3;
 
 // First index in PAYLINES that is a zig-zag (payline 4 in the spec).
 export function evaluateSpin(positions: number[]) {
+  if (positions.length !== CONFIG.REEL_COUNT) {
+    return { totalWins: 0, winDetails: [] };
+  }
+
   let totalWins = 0;
   const winDetails: WinDetail[] = [];
 
